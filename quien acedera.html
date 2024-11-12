@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTION DE MATRICULAS DE ISEA</title>
+    <link rel="stylesheet" href="sujerencias.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <style>
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div id="header-container">
+            <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logo" alt="Logo ISEA">
+            <h1>¡INICIA SESION CON NOSOTROS!</h1>
+            <nav>
+                <ul class="menu">
+                    <li><a href="ISEA.html">Atras</a></li>
+                    <li><a href="#" id="continuar" class="disabled" onclick="redireccionar()">Continuar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="section2">
+        <div id="Quien">
+            <form action="#" method="post">
+                <label for="genero">¿Quien Accede?</label><br>
+                <select id="genero" name="Seleccione" required onchange="habilitarBoton()">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Administración">Administracion</option>
+                </select>
+            </form> 
+        </div>
+    </section>
+
+
+    <script>
+        function habilitarBoton() {
+            const select = document.getElementById('genero');
+            const botonContinuar = document.getElementById('continuar');
+            
+            if (select.value !== '') {
+                botonContinuar.classList.remove('disabled');
+            } else {
+                botonContinuar.classList.add('disabled');
+            }
+        }
+
+        function redireccionar() {
+            const select = document.getElementById('genero');
+            const selectedValue = select.value;
+
+            // Guardar la selección en localStorage
+            localStorage.setItem('userRole', selectedValue);
+
+            // Redirigir a la página de inicio de sesión
+            window.location.href = 'inicio sesion.html';
+        }
+
+        // Asegurarse de que el botón esté deshabilitado al cargar la página
+        window.onload = function() {
+            document.getElementById('continuar').classList.add('disabled');
+        }
+    </script>
+</body>
+</html>

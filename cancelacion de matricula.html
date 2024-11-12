@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="cancelacion de maricula.css">
+    
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <a href="ISEA.html"><img src="IMAGENES/ISEA-removebg-preview (1).png" id="logoalumno"></a>
+            <h1>Cancelación de Matrícula Escolar</h1>
+            <ul class="menu">
+                <li><a href="ISEA.html">Atras</a></li>
+            </ul>
+        </div>
+        
+        <p>Solicite la cancelación de matrícula de su hijo/a de manera rápida y sencilla. Por favor, lea las instrucciones y complete el formulario.</p>
+    </header>
+
+    <section class="instrucciones">
+        <h2>Instrucciones</h2>
+        <ol>
+            <li>Complete el formulario de solicitud de cancelación.</li>
+            <li>Adjunte cualquier documento necesario (identificación del estudiante y del tutor).</li>
+            <li>Envíe el formulario y espere una confirmación de nuestro equipo.</li>
+        </ol>
+    </section>
+
+    <section class="formulario">
+        <h2>Formulario de Cancelación</h2>
+        <form action="/submit-cancelacion" method="POST">
+            <label for="nombre">Nombre del Estudiante:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="grado">Grado:</label>
+            <input type="text" id="grado" name="grado" required>
+
+            <label for="matricula">Número de Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" required>
+
+            <label for="nombre-tutor">Nombre del Tutor:</label>
+            <input type="text" id="nombre-tutor" name="nombre-tutor" required>
+
+            <label for="motivo">Motivo de Cancelación:</label>
+            <textarea id="motivo" name="motivo" required></textarea>
+
+            <label>
+                <input type="checkbox" name="aceptar" required>
+                Acepto los términos y condiciones de la cancelación de matrícula.
+            </label>
+
+            <button onclick="window.location.href='CALENDARIO.html'">Agenda tu Cita</button>
+            
+        </form>
+    </section>
+
+  
+    
+    
+
+    <footer>
+        <p>&copy; 2023 Colegio Público. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

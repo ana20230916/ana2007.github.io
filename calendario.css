@@ -1,0 +1,84 @@
+/* Estilos generales */
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding-top: 0; /* Evitar que el contenido se superponga al header */
+}
+
+header {
+  background-color: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,39,0.8855917366946778) 35%);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+#header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#logoalumno {
+  height: 100px;
+}
+
+/* Estilos del menú */
+.menu {
+  list-style-type: none; 
+  margin: 0;
+  padding: 0;
+  display: flex; 
+  justify-content: center; /* Centra el menú horizontalmente */
+  background-color:rgb(2,0,36) ; 
+  border-radius: 12px; /* Bordes más redondeados para un aspecto moderno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para profundidad */
+}
+
+.menu li {
+  margin: 0 10px; /* Espaciado horizontal entre elementos */
+}
+
+.menu a {
+  text-decoration: none; 
+  color: white; 
+  font-size: 18px;
+  display: block; 
+  padding: 10px 15px; /* Espaciado interno para hacer clic más fácil */
+  border-radius: 8px; /* Bordes redondeados para los enlaces */
+  transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+.menu a:hover {
+  background-color: #4a1763; /* Color de fondo al pasar el ratón */
+  transform: scale(0.75); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+.menu a:active {
+  background-color: #4a1763; /* Color de fondo al hacer clic */
+}
+
+/* Estilos para el contenedor del calendario */
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto; /* Centra el contenedor */
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+  .menu {
+      flex-direction: column;
+  }
+}

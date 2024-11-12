@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+    <header>
+        <div id="header-container">
+          <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logoalumno" alt="">
+          <div class="text-container">
+            <h1>Registrate con ISEA</h1>
+          </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="registro estudiante.html">Atras</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="DatosEstudiantes">
+        <div id="Quien">
+            <div class="container">
+                <form id="studentForm">
+                    <h2>Información Personal</h2><br>
+                    <div>
+                        <label for="primer_nombre">Primer Nombre</label>
+                        <input type="text" id="primer_nombre" name="primer_nombre" required>
+                    </div>
+                    <div>
+                        <label for="segundo_nombre">Segundo Nombre</label>
+                        <input type="text" id="segundo_nombre" name="segundo_nombre">
+                    </div>
+                    <div>
+                        <label for="apellido">Primer Apellido</label>
+                        <input type="text" id="apellido" name="apellido" required>
+                    </div>
+                    <div>
+                        <label for="segundo_apellido">Segundo Apellido</label>
+                        <input type="text" id="segundo_apellido" name="segundo_apellido">
+                    </div>
+                    <div>
+                        <label for="tipo_documento_acudiente">Tipo de Documento</label>
+                        <select id="tipo_documento_acudiente" name="tipo_documento_acudiente" required>
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="cedula">Cédula de Ciudadanía</option>
+                            <option value="registro_civil">Cédula Extranjera</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numero_documento_acudiente">Número de Documento</label>
+                        <input type="text" id="numero_documento_acudiente" name="numero_documento_acudiente" required>
+                    </div>
+                    <div>
+                        <label for="expedido_acudiente">Expedido</label>
+                        <input type="text" id="expedido_acudiente" name="expedido_acudiente">
+                    </div>
+                    <div>
+                        <label for="fecha_expedicion_acudiente">Fecha de Expedición</label>
+                        <input type="date" id="fecha_expedicion_acudiente" name="fecha_expedicion_acudiente">
+                    </div>
+                    <div>
+                        <label for="genero">Género</label>
+                        <select id="genero" name="genero" required>
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="telefono_acudiente">Teléfono</label>
+                        <input type="text" id="telefono_acudiente" name="telefono_acudiente">
+                    </div>
+                    <div>
+                        <label for="celular_acudiente">Celular</label>
+                        <input type="text" id="celular_acudiente" name="celular_acudiente">
+                    </div>
+                    <div>
+                        <label for="email_acudiente">E-mail</label>
+                        <input type="email" id="email_acudiente" name="email_acudiente" required>
+                    </div>
+                    <div>
+                        <label for="barrio_acudiente">Barrio de Residencia</label>
+                        <input type="text" id="barrio_acudiente" name="barrio_acudiente">
+                    </div>
+                    <div>
+                        <label for="direccion_acudiente">Dirección</label>
+                        <input type="text" id="direccion_acudiente" name="direccion_acudiente">
+                    </div>
+                    <div>
+                        <label for="identificacion_acudiente">Identificación Estudiante</label>
+                        <input type="text" id="identificacion_acudiente" name="identificacion_acudiente">
+                    </div>
+                    <div>
+                        <label for="parentesco_acudiente">Parentesco</label>
+                        <input type="text" id="parentesco_acudiente" name="parentesco_acudiente">
+                    </div>
+                    <button type="button" onclick="guardarAcudiente()" class="btn guardar-btn">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+    initializeForm();
+    setupValidations();
+    setupAutoSave();
+    checkFormStatus();
+});
+
+// Reglas de validación extendidas
+const validationRules = {
+    primer_nombre: {
+        pattern: /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]{2,50}$/,
+        message: 'Nombre inválido (solo letras, 2-50 caracteres)',
+        required: true
+    },
+    apellido: {
+        pattern: /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]{2,50}$/,
+        message: 'Apellido inválido (solo letras, 2-50 caracteres)',
+        required: true
+    },
+    numero_documento_acudiente: {
+        pattern: /^\d{8,12}$/,
+        message: 'Documento inválido (8-12 dígitos)',
+        required: true,
+        unique: true
+    },
+    celular_acudiente: {
+        pattern: /^\d{10}$/,
+        message: 'Celular inválido (10 dígitos)',
+        required: true
+    },
+    email_acudiente: {
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: 'Correo electrónico inválido',
+        required: true,
+        unique: true
+    }
+};
+
+// Función de validación mejorada
+function validateField(field) {
+    const rule = validationRules[field.id];
+    let isValid = true;
+    let errorMessage = '';
+
+    clearError(field);
+
+    if (rule) {
+        // Validación de campo requerido
+        if (rule.required && !field.value.trim()) {
+            isValid = false;
+            errorMessage = 'Este campo es obligatorio';
+        } 
+        // Validación de patrón
+        else if (rule.pattern && !rule.pattern.test(field.value)) {
+            isValid = false;
+            errorMessage = rule.message;
+        }
+        // Validación de unicidad
+        else if (rule.unique && checkUniqueField(field)) {
+            isValid = false;
+            errorMessage = 'Este valor ya está registrado';
+        }
+    }
+
+    if (!isValid) {
+        showError(field, errorMessage);
+    }
+
+    return isValid;
+}
+
+// Función para verificar unicidad de campos
+function checkUniqueField(field) {
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    return registeredUsers.some(user => 
+        user[field.name] === field.value
+    );
+}
+
+// Función de guardado con validaciones mejorada
+function guardarAcudiente() {
+    const form = document.getElementById('studentForm');
+    let isValid = true;
+
+    // Validar todos los campos
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de Validación',
+            text: 'Por favor, corrija los errores en el formulario'
+        });
+        return;
+    }
+
+    // Recopilar datos del formulario
+    const formData = new FormData(form);
+    const acudienteData = Object.fromEntries(formData.entries());
+
+    try {
+        // Obtener usuarios registrados
+        const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        
+        // Verificar si el usuario ya existe
+        const existingUserIndex = registeredUsers.findIndex(
+            user => user.numero_documento_acudiente === acudienteData.numero_documento_acudiente
+        );
+
+        if (existingUserIndex !== -1) {
+            // Actualizar usuario existente
+            registeredUsers[existingUserIndex] = acudienteData;
+        } else {
+            // Agregar nuevo usuario
+            registeredUsers.push(acudienteData);
+        }
+
+        // Guardar usuarios actualizados
+        localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+        
+        // Guardar datos específicos del acudiente
+        localStorage.setItem('acudienteData', JSON.stringify(acudienteData));
+
+        // Mostrar confirmación
+        Swal.fire({
+            icon: 'success',
+            title: 'Registro Exitoso',
+            text: 'Los datos del acudiente han sido guardados correctamente',
+            confirmButtonText: 'Continuar',
+            didClose: () => {
+                window.location.href = 'Panel estudiante.html';
+            }
+        });
+
+    } catch (error) {
+        console.error('Error en el registro:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de Registro',
+            text: 'No se pudo completar el registro. Intente nuevamente.'
+        });
+    }
+}
+
+// Función de autoguardado
+function setupAutoSave() {
+    const form = document.getElementById('studentForm');
+    const inputs = form.querySelectorAll('input, select');
+
+    inputs.forEach(input => {
+        input.addEventListener('change', function() {
+            autoSaveForm();
+        });
+    });
+}
+
+function autoSaveForm() {
+    const form = document.getElementById('studentForm');
+    const formData = new FormData(form);
+    const formDataObj = Object.fromEntries(formData.entries());
+    
+    localStorage.setItem('autoSavedAcudienteForm', JSON.stringify(formDataObj));
+    
+    console.log('Formulario autoguardado');
+}
+
+// Función para restaurar autoguardado
+function checkFormStatus() {
+    const autoSavedData = localStorage.getItem('autoSavedAcudienteForm');
+    
+    if (autoSavedData) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Datos Guardados',
+            text: '¿Desea restaurar el último formulario guardado?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, restaurar',
+            cancelButtonText: 'No, comenzar de nuevo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = JSON.parse(autoSavedData);
+                const form = document.getElementById('studentForm');
+                
+                Object.keys(formData).forEach(key => {
+                    const field = form.querySelector(`[name="${key}"]`);
+                    if (field) field.value = formData[key];
+                });
+            } else {
+                localStorage.removeItem('autoSavedAcudienteForm');
+            }
+        });
+    }
+}
+
+// Configurar validaciones en tiempo real
+function setupValidations() {
+    const inputs = document.querySelectorAll('input, select');
+    
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            validateField(this);
+        });
+
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+    });
+}
+
+// Función de inicialización
+function initializeForm() {
+    // Configuraciones iniciales del formulario
+    const form = document.getElementById('studentForm');
+    form.setAttribute('novalidate', true);
+}
+
+// Mostrar errores
+function showError(field, message) {
+    clearError(field);
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    errorDiv.classList.add('error-message');
+    field.classList.add('invalid');
+    field.parentNode.appendChild( errorDiv);
+}
+
+function clearError(field) {
+    const errorDiv = field.parentNode.querySelector('.error-message');
+    if (errorDiv) {
+        errorDiv.remove();
+    }
+    field.classList.remove('invalid');
+}
+
+// Función para guardar datos del acudiente
+function guardarDatosAcudiente() {
+    const form = document.getElementById('studentForm');
+    const formData = new FormData(form);
+    const acudienteData = {};
+
+    formData.forEach((value, key) => {
+        acudienteData[key] = value;
+    });
+
+    // Guardar en localStorage
+    localStorage.setItem('acudienteData', JSON.stringify(acudienteData));
+}
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body>
+    </html>

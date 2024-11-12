@@ -1,0 +1,494 @@
+/* Estilos generales */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding-top: 0; /* Evitar que el contenido se superponga al header */
+}
+
+header {
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,39,0.8855917366946778) 35%);
+    color: white;
+    padding: 0px;
+    text-align: center;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+
+#logoalumno {
+    height: 149px;
+}
+
+/* Estilos del menú */
+.menu {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    justify-content: center; /* Centra el menú horizontalmente */
+    background-color: #230330; 
+    border-radius: 12px; /* Bordes más redondeados para un aspecto moderno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para profundidad */
+}
+
+.menu li {
+    margin: 0 10px; /* Espaciado horizontal entre elementos */
+}
+
+.menu a {
+    text-decoration: none; 
+    color: white; 
+    font-size: 18px;
+    display: block; 
+    padding: 10px 15px; /* Espaciado interno para hacer clic más fácil */
+    border-radius: 8px; /* Bordes redondeados para los enlaces */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+.menu a:hover {
+    background-color:  #4a1763; /* Color de fondo al pasar el ratón */
+    transform: scale(0.75); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+.menu a:active {
+    background-color: #4a1763/* Color de fondo al hacer clic */
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .menu {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+        padding: 10px; /* Espaciado interno adicional */
+    }
+
+    .menu li {
+        margin: 5px 0; /* Espaciado vertical en pantallas pequeñas */
+    }
+}
+
+
+/* Estilos del contenedor */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto; /* Centra el contenedor */
+}
+
+/* Estilos para el formulario */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Espaciado entre campos */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #333;
+}
+
+input:focus,
+select:focus {
+    border-color: #007BFF; /* Cambiar el color del borde al enfocar */
+    outline: none; /* Quitar el contorno por defecto */
+}
+
+/* Botón de Guardar */
+button {
+    grid-column: span 2;
+    padding: 10px;
+    background-color: #230330;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s; /* Efecto de transición */
+}
+
+button:hover {
+    background-color:rgb(2,0,36);
+}
+
+/* Estilos para las pestañas */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tab-button.active,
+.tab-button:hover {
+    background-color: #0056b3;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Estilo del encabezado de la sección */
+.header {
+    background-color: #e9f3fb;
+    padding: 15px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* Foto del estudiante */
+#fotoEstudiante {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+/* Campos con ancho completo */
+.full-width {
+    grid-column: span 2;
+}
+/* Estilos para el contenedor de la foto */
+.photo-upload-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+}
+
+/* Estilos para la imagen de preview */
+#fotoEstudiante {
+    width: 150px;
+    height: 150px;
+    border-radius: 10%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin: 10px auto;
+    display: block;
+}
+
+/* Contenedor para el input de archivo personalizado */
+.file-upload {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Ocultar el input original */
+.file-upload input[type="file"] {
+    display: none;
+}
+
+/* Estilo para el botón personalizado */
+.file-upload-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color:rgb(2,0,36);
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.file-upload-btn:hover {
+    background-color:#230330;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Texto de archivo seleccionado */
+.file-name {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Ícono de cámara */
+.camera-icon {
+    margin-right: 8px;
+}
+
+/* Animación de carga */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.uploading {
+    animation: pulse 1.5s infinite;
+}/* Estilos para el estado hover del contenedor */
+.photo-upload-container:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilos para el estado activo del botón */
+.file-upload-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Estilos para el estado de arrastrar y soltar */
+.photo-upload-container.dragover {
+    background-color: #e8f5e9;
+    border: 2px dashed #4CAF50;
+}
+
+/* Mensaje de arrastrar y soltar */
+.drag-message {
+    display: none;
+    margin-top: 10px;
+    color: #666;
+    font-style: italic;
+}
+
+.photo-upload-container.dragover .drag-message {
+    display: block;
+}
+.student-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin: 0 auto 20px;
+    display: block;
+    
+    /* Estilos para centrar el texto alternativo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    background-color: #f8f9fa;
+}
+
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: green;
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.invalid {
+    border-color: red !important;
+}
+.disabled {
+    pointer-events : none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: green;
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.invalid {
+    border-color: red !important;
+}
+.btn {
+    background-color: #230330; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 15px 32px; /* Espaciado interno */
+    text-align: center; /* Centrar el texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Para que se comporte como un bloque */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 4px 2px; /* Espaciado alrededor del botón */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+.guardar-btn:hover {
+    background-color: #4a1763; /* Color de fondo al pasar el mouse */
+}
+
+footer {
+    background: rgb(77, 80, 77);
+
+
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    flex-direction:column;
+  
+    
+    ul {
+        display: flex;
+        flex-direction:row; 
+        align-items:center;
+        justify-content:center;
+        height: 100%;
+    }
+    
+    ul li {
+        list-style: none;
+    }
+    
+    ul li a {
+        width: 70px;
+        height: 70px;
+        background-color: #fff;
+        text-align: center;
+        line-height: 80px;
+        font-size: 35px;
+        margin: 0 10px;
+        display: block;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        border: 3px solid #fff;
+        z-index: 1;
+    }
+    
+    ul li a .icon {
+        position: relative;
+        color: #262626;
+        transition: .5s;
+        z-index: 3;
+    }
+    
+    ul li a:hover .icon {
+        color: #fff;
+        transform: rotateY(360deg);
+    }
+    
+    ul li a:before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f00;
+        transition: .5s;
+        z-index: 2;
+    }
+
+    ul li a:hover:before {
+        top: 0;
+    }
+    
+    ul li:nth-child(1) a:before{
+        background: #3b5999;
+    }
+    
+    ul li:nth-child(2) a:before{
+        background: #57ee55;
+    }
+    
+    ul li:nth-child(3) a:before {
+        background: rgb(198,0,227);
+        background: linear-gradient(180deg, rgba(198,0,227,1) 23%, rgba(251,1,202,1) 35%, rgba(248,74,20,1) 75%, rgba(227,71,0,1) 78%);
+        
+    }
+    
+    ul li:nth-child(4) a:before {
+        background:  #c51909;
+    }
+    
+}
+
+
+
+
+
+#footer-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+
+
+

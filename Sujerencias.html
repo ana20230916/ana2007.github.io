@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="sujerencias.css">
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logo" alt="Logo ISEA">
+            <h1>Sujerencias</h1>
+            <nav>
+                <ul class="menu">
+                    <li><a href="ISEA.html" id="atras" class="btn">Atras</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+
+    <section class="sugerencias">
+        <h2>¿Quién accederá?</h2>
+        <label for="tipoDocumento">Tipo de Documento:</label>
+        <select id="tipoDocumento">
+            <option value="CC">Cédula de Ciudadanía</option>
+            <option value="TI">Tarjeta de Identidad</option>
+            <option value="CE">Cédula de Extranjería</option>
+        </select>
+        
+        <label for="numeroDocumento">Número de Documento:</label>
+        <input type="text" id="numeroDocumento" placeholder="Número de documento">
+        
+        <button id="btnAcceder" onclick="acceder()">Acceder</button>
+        <button id="btnEnviarSugerencia" onclick="enviarSugerencia()">Enviar Sugerencia</button>
+        <button id="btnVerSugerencias" onclick="verSugerencias()">Ver Sugerencias</button>
+
+        <!-- Cuadro de texto para escribir sugerencias (oculto inicialmente) -->
+        <div id="cuadroSugerencia" style="display: none;">
+            <label for="sugerencia">Escribe tu sugerencia:</label>
+            <textarea id="sugerencia" rows="4" placeholder=""></textarea>
+        </div>
+        
+        <!-- Área para mostrar las sugerencias enviadas -->
+        <div id="listaSugerencias" style="display: none;">
+            <h3>Sugerencias Enviadas:</h3>
+            <ul id="sugerenciasList"></ul>
+        </div>
+    </section>
+    
+    <script src="sujerencias.js"></script>
+</body>
+</html>

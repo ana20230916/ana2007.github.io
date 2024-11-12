@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="panel administracion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logo" alt="Logo ISEA">
+            <h1>Bienvenido Administador</h1>
+            <nav>
+                <ul class="menu">
+
+                    <li><a href="ISEA.html">Cerrar Sesion</a></li>
+                </ul>
+                      
+            </nav>
+        </div>
+    </header><br>
+
+
+
+    <div class="container">
+        <aside class="sidebar">  
+            <h2>Panel Adminitador</h2>
+            <img src="IMAGENES/aajajjj.png" alt="logo">
+        </aside><br>
+
+    
+        <div class="button-grid"><br>
+            <button onclick="window.location.href='solicitud matricula.html'">Solicitud de Matricula</button><br>
+            <button id="openModal">Disponibilidad de Cupos</button> <br>
+
+
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="hp2">Disponibilidad de Cupos</h2>
+                
+                <div class="sede" data-sede="baldomero">
+                    <h3>Sede Baldomero Sanin Cano</h3>
+                    <div class="cupos">
+                        <p>Cupos disponibles:</p>
+                        <p class="disponible">45 cupos</p>
+                    </div>
+                    <p>Niveles: Preescolar a 5°</p>
+                    <p>Jornada: Mañana y Tarde</p>
+                    <div class="grados-modal" id="grados-baldomero">
+                        <div class="grado-item">
+                            <span class="grado-nombre">Preescolar</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Primero</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Segundo</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Tercero</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Cuarto</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Quinto</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="sede" data-sede="mora">
+                    <h3>Sede Mora Vasquez</h3>
+                    <div class="cupos">
+                        <p>Cupos disponibles:</p>
+                        <p class="disponible">30 cupos</p>
+                    </div>
+                    <p>Niveles: Preescolar a 5°</p>
+                    <p>Jornada: Mañana y tarde</p>
+                    <div class="grados-modal" id="grados-mora">
+                        <div class="grado-item">
+                            <span class="grado-nombre">Preescolar</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Primero</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Segundo</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Tercero</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Cuarto</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Quinto</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="sede" data-sede="jose-roberto">
+                    <h3>Sede Jose Roberto Vasquez</h3>
+                    <div class="cupos">
+                        <p>Cupos disponibles:</p>
+                        <p class="lleno">0 cupos</p>
+                    </div>
+                    <p>Niveles: 6° a 11°</p>
+                    <p>Jornada: Tarde y Mañana</p>
+                    <div class="grados-modal" id="grados-jose-roberto">
+                        <div class="grado-item">
+                            <span class="grado-nombre">Sexto</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Séptimo</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Octavo</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Noveno</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Décimo</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                        <div class="grado-item">
+                            <span class="grado-nombre">Once</span>
+                            <span class="grado-cupos">5 cupos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("openModal");
+var span = document.getElementsByClassName("close")[0];
+
+// Abrir modal al hacer clic en el botón
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// Cerrar modal al hacer clic en (x)
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Cerrar modal si se hace clic fuera de él
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Añadir evento de clic a las sedes
+document.querySelectorAll('.sede').forEach(sede => {
+    sede.addEventListener('click', function(event) {
+        // Prevenir que el evento se propague si se hace clic en los grados
+        if (event.target.closest('.grados-modal')) return;
+
+        const gradosContainer = this.querySelector('.grados-modal');
+        
+        // Toggle de visualización de grados
+        if (gradosContainer.style.display === 'block' || gradosContainer.style.display === '') {
+            gradosContainer.style.display = 'none';
+        } else {
+            // Ocultar grados de otras sedes
+            document.querySelectorAll('.grados-modal').forEach(container => {
+                if (container !== gradosContainer) {
+                    container.style.display = 'none';
+                }
+            });
+            
+            // Mostrar grados de la sede actual
+            gradosContainer.style.display = 'block';
+        }
+    });
+});
+        </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTION DE MATRICULAS DE ISEA</title>
+    <link rel="stylesheet" href="sujerencias.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <style>
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logo" alt="Logo ISEA">
+            <h1>¡Inicia Sesion con Nosotros!</h1>
+            <nav>
+                <ul class="menu">
+                    <li><a href="quien acedera.html" id="atras" class="btn">Atras</a></li>
+                    <li><a href="#" id="Iniciar" class="btn disabled" onclick="iniciarSesion()">Iniciar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="section1">
+            <h2> Datos</h2>
+            
+                <form id="registrationForm" onsubmit="return false;">
+                    <div>
+                        <label for="numero_documento">Numero de Documento</label>
+                        <input type="text" id="numero_documento" name="numero_documento" required onchange="habilitarBoton()">
+                    </div>
+
+                    <div>
+                        <label for="numero_documento">Contraseña</label>
+                        <input type="password" id="contraseña" name="contraseña" required onchange="habilitarBoton()">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>    
+
+
+    <script src="script.js"></script>
+    <script>
+       
+        function habilitarBoton() {
+            const tipoDocumento = document.getElementById('numero_documento').value;
+            const numeroDocumento = document.getElementById('contraseña').value;
+            const botonIniciar = document.getElementById('Iniciar');
+
+            if (tipoDocumento && numeroDocumento) {
+                botonIniciar.classList.remove('disabled');
+            } else {
+                botonIniciar.classList.add('disabled');
+            }
+        }
+
+       
+        function iniciarSesion() {
+            const userRole = localStorage.getItem('userRole');
+
+          
+            if (userRole) {
+                if (userRole === 'Estudiante') {
+                    window.location.href = 'Panel estudiante.html'; 
+                } else if (userRole === 'Administración') {
+                    window.location.href = 'panel administrador.html'; 
+                }
+            } else {
+                alert('No se ha seleccionado un rol.'); 
+            }
+        }
+    </script>
+</body>
+</html>

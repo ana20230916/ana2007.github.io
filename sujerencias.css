@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #f7f7f7;
+    color: #333;
+    padding:0px;
+}
+
+
+header {
+    background-color: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,39,0.8855917366946778) 35%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+
+
+/* Estilos del menú */
+.menu {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    justify-content: center; /* Centra el menú horizontalmente */
+    background-color:  rgb(2,0,36); 
+    border-radius: 12px; /* Bordes más redondeados para un aspecto moderno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para profundidad */
+}
+
+.menu li {
+    margin: 0 10px; /* Espaciado horizontal entre elementos */
+}
+
+.menu a {
+    text-decoration: none; 
+    color: white; 
+    font-size: 18px;
+    display: block; 
+    padding: 10px 15px; /* Espaciado interno para hacer clic más fácil */
+    border-radius: 8px; /* Bordes redondeados para los enlaces */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+.menu a:hover {
+    background-color: #230330; /* Color de fondo al pasar el ratón */
+    transform: scale(0.75); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+.menu a:active {
+    background-color:#230330; /* Color de fondo al hacer clic */
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .menu {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+        padding: 10px; /* Espaciado interno adicional */
+    }
+
+    .menu li {
+        margin: 5px 0; /* Espaciado vertical en pantallas pequeñas */
+    }
+}
+
+#logo {
+    height: 130px;
+    margin: -25px;
+    padding: 0;
+}
+
+
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+section {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    
+
+    
+    width: 600px;
+    height: 345px;
+    border-radius: 4%;
+    object-fit: cover;
+    border: 0px solid #fff;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    margin: 10px auto;
+    display: block;
+}
+#section1 {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin: 20px;
+
+    
+    width: 600px;
+    height: 300px;
+    border-radius: 4%;
+    object-fit: cover;
+    border: 0px solid #fff;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    margin: 10px auto;
+    display: block;
+}
+#section2 {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+
+    
+    width: 600px;
+    height: 230px;
+    border-radius: 4%;
+    object-fit: cover;
+    border: 0px solid #fff;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    margin: 10px auto;
+    display: block;
+}
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #230330df;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #4a1763;
+}
+
+.contacto p {
+    margin: 10px 0;
+}
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="acudiente.css"> 
+    <style>
+        /* Estilo adicional para campos de solo lectura */
+        .read-only {
+            background-color: #f4f4f4;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logoalumno" alt="Logo de ISEA">
+            <h1>Datos del Acudiente</h1>
+            <nav>
+                <ul class="menu">
+                    <li><a href="hoja de vida.html">Atrás</a></li>
+                    <li><a href="Panel estudiante.html">Salir</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="acudiente" class="tab-content container">
+        <form id="guardianForm">
+            <h2>Información Personal</h2><br>
+            <div>
+                <label for="primer_nombre">Primer Nombre</label>
+                <input type="text" id="primer_nombre" name="primer_nombre" readonly class="read-only">
+            </div>
+            <div>
+                <label for="segundo_nombre">Segundo Nombre</label>
+                <input type="text" id="segundo_nombre" name="segundo_nombre" readonly class="read-only">
+            </div>
+            <div>
+                <label for="apellido">Primer Apellido</label>
+                <input type="text" id="apellido" name="apellido" readonly class="read-only">
+            </div>
+            <div>
+                <label for="segundo_apellido">Segundo Apellido</label>
+                <input type="text" id="segundo_apellido" name="segundo_apellido" readonly class="read-only">
+            </div>
+            <div>
+                <label for="tipo_documento_acudiente">Tipo de Documento</label>
+                <select id="tipo_documento_acudiente" name="tipo_documento_acudiente" disabled class="read-only">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="cedula">Cédula de Ciudadanía</option>
+                    <option value="registro_civil">Cédula Extranjera</option>
+                </select>
+            </div>
+            <div>
+                <label for="numero_documento_acudiente">Número de Documento</label>
+                <input type="text" id="numero_documento_acudiente" name="numero_documento_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="expedido_acudiente">Expedido</label>
+                <input type="text" id="expedido_acudiente" name="expedido_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="fecha_expedicion_acudiente">Fecha de Expedición</label>
+                <input type="date" id="fecha_expedicion_acudiente" name="fecha_expedicion_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="genero">Género</label>
+                <select id="genero" name="genero" disabled class="read-only">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div>
+                <label for="telefono_acudiente">Teléfono</label>
+                <input type="text" id="telefono_acudiente" name="telefono_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="celular_acudiente">Celular</label>
+                <input type="text" id="celular_acudiente" name="celular_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="email_acudiente">E-mail</label>
+                <input type="email" id="email_acudiente" name="email_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="barrio_acudiente">Barrio de Residencia</label>
+                <input type="text" id="barrio_acudiente" name="barrio_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="direccion_acudiente">Dirección</label>
+                <input type="text" id="direccion_acudiente" name="direccion_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="identificacion_acudiente">Identificación Estudiante</label>
+                <input type="text" id="identificacion_acudiente" name="identificacion_acudiente" readonly class="read-only">
+            </div>
+            <div>
+                <label for="parentesco_acudiente">Parentesco</label>
+                <input type="text" id="parentesco_acudiente" name="parentesco_acudiente" readonly class="read-only">
+            </div>
+            <!-- Botón eliminado ya que es solo lectura -->
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarDatosAcudiente();
+            bloquearCampos();
+        });
+
+        function cargarDatosAcudiente() {
+            const datosGuardados = localStorage.getItem('acudienteData');
+            
+            if (datosGuardados) {
+                const acudienteData = JSON.parse(datosGuardados);
+                const form = document.getElementById('guardianForm');
+
+                // Iterar sobre los campos y establecer valores
+                Object.keys(acudienteData).forEach(key => {
+                    const campo = form.querySelector(`[name="${key}"]`);
+                    if (campo) {
+                        campo.value = acudienteData[key];
+                    }
+                });
+            }
+        }
+
+        function bloquearCampos() {
+            const campos = document.querySelectorAll('#guardianForm input, #guardianForm select');
+            campos.forEach(campo => {
+                campo.setAttribute('readonly', true);
+                campo.setAttribute('disabled', true);
+                campo.classList.add('read-only');
+            });
+        }
+    </script>
+</body>
+</html>

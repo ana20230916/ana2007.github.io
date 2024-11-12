@@ -1,0 +1,267 @@
+:root {
+    --primary-color: #4a1763; /* Verde más vibrante */
+    --secondary-color:    /* Verde principal */
+    --success-color: #bbff00;
+    --danger-color: #e74c3c;
+    --light-bg: #0e1c54; /* Fondo verde claro */
+    --text-color: #000000d4; /* Gris oscuro para texto */
+    --white: #ffffff;
+    --border-color: #da0a0ae8; 
+}
+.letra{
+    color: hsl(180, 100%, 100%);
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color:  rgba(255, 255, 255, 0.733);
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,39,0.8855917366946778) 35%);
+    color: var(--white);
+    padding: 25px 0;
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.1);
+}
+
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
+
+#logo {
+    height: 130px;
+    margin: -25px;
+    padding: 0;
+}
+
+/* Estilos del menú */
+.menu {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    justify-content: center; /* Centra el menú horizontalmente */
+    background-color: #230330df; 
+    border-radius: 12px; /* Bordes más redondeados para un aspecto moderno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para profundidad */
+}
+
+.menu a {
+    margin: 0 10px; /* Espaciado horizontal entre elementos */
+}
+
+.menu a {
+    text-decoration: none; 
+    color: white; 
+    font-size: 18px;
+    display: block; 
+    padding: 10px 15px; /* Espaciado interno para hacer clic más fácil */
+    border-radius: 8px; /* Bordes redondeados para los enlaces */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+.menu a:hover {
+    background-color: #4a1763; /* Color de fondo al pasar el ratón */
+    transform: scale(0.75); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+.menu a:active {
+    background-color:  #4a1763; /* Color de fondo al hacer clic */
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .menu {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+        padding: 10px; /* Espaciado interno adicional */
+    }
+
+    .menu li {
+        margin: 5px 0; /* Espaciado vertical en pantallas pequeñas */
+    }
+}
+
+.filtros {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: rgb(255, 253, 253);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+.filtro-busqueda, .filtro-orden {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#busqueda {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    width: 250px;
+    transition: border-color 0.3s ease;
+}
+
+#busqueda:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+#orden-solicitudes {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: rgb(255, 253, 253);
+}
+
+#lista-solicitudes {
+    display: grid;
+    gap: 20px;
+}
+
+.solicitud {
+    background-color: rgb(255, 253, 253);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.solicitud:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.solicitud-detalles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.solicitud-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.btn-accept {
+    background-color:#4a1763;
+    color: var(--white);
+}
+
+.btn-accept:hover {
+    background-color: #8d40b4;
+}
+
+.btn-reject {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+.btn-reject:hover {
+    background-color: #c0392b;
+}
+
+.solicitud-timestamp {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #7f8c8d;
+    font-size: 0.8em;
+}
+
+#estadisticas {
+    margin-top: 30px;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    background-color: rgb(255, 253, 253);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.badge-nuevo {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    #header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .solicitud-detalles {
+        grid-template-columns: 1fr;
+    }
+}

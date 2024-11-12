@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+    <header>
+        <div id="header-container">
+          <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logoalumno" alt="">
+          <div class="text-container">
+            <h1>Registrate con ISEA</h1>
+          </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="ISEA.html">Atras</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="DatosEstudiantes">
+        <div id="Quien">
+            <div class="container">
+                <div class="photo-upload-container">
+                    <img id="fotoEstudiante" src="placeholder.jpg" >
+                    <div class="file-upload">
+                        <label for="foto" class="file-upload-btn">
+                            <i class="camera-icon">📸</i>
+                            Seleccionar Foto
+                        </label>
+                        <input type="file" id="foto" name="foto" accept="image/*">
+                        <div class="file-name"></div>
+                    </div>
+                </div>
+                <form id="studentForm">
+                    <h2>Información Personal</h2><br>
+                    <div>
+                        <label for="primer_nombre">Primer Nombre</label>
+                        <input type="text" id="primer_nombre" name="primer_nombre" required>
+                    </div>
+                    <div>
+                        <label for="segundo_nombre">Segundo Nombre</label>
+                        <input type="text" id="segundo_nombre" name="segundo_nombre">
+                    </div>
+                    <div>
+                        <label for="apellido">Primer Apellido</label>
+                        <input type="text" id="apellido" name="apellido" required>
+                    </div>
+                    <div>
+                        <label for="segundo_apellido">Segundo Apellido</label>
+                        <input type="text" id="segundo_apellido" name="segundo_apellido">
+                    </div>
+                    <div>
+                        <label for="tipo_documento">Tipo de Documento</label>
+                        <select id="tipo_documento" name="tipo_documento" required>
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="cedula">Cédula de Ciudadanía</option>
+                            <option value="tarjeta_identidad">Tarjeta de Identidad</option>
+                            <option value="registro_civil">Registro Civil</option>
+                            <option value="cedula_extranjera">Cédula Extranjera</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numero_documento">Número de Documento</label>
+                        <input type="text" id="numero_documento" name="numero_documento" required>
+                    </div>
+                    <div>
+                        <label for="lugar_expedicion">Lugar de Expedición</label>
+                        <input type="text" id="lugar_expedicion" name="lugar_expedicion">
+                    </div>
+                    <div>
+                        <label for="fecha_expedicion">Fecha de Expedición</label>
+                        <input type="date" id="fecha_expedicion" name="fecha_expedicion">
+                    </div>
+                    <div>
+                        <label for="genero">Género</label>
+                        <select id="genero" name="genero" required>
+                            <option value="" disabled selected>Seleccione </option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="celular_estudiante">Celular</label>
+                        <input type="text" id="celular_estudiante" name="celular_estudiante">
+                    </div>
+                    <div>
+                        <label for="email_estudiante">E-mail</label>
+                        <input type="email" id="email_estudiante" name="email_estudiante">
+                    </div>
+                    <div>
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+ <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                    </div>
+                    <div>
+                        <label for="ciudad_nacimiento">Ciudad de Nacimiento</label>
+                        <input type="text" id="ciudad_nacimiento" name="ciudad_nacimiento">
+                    </div>
+                    <div>
+                        <label for="barrio_estudiante">Barrio de Residencia</label>
+                        <input type="text" id="barrio_estudiante" name="barrio_estudiante">
+                    </div>
+                    <div>
+                        <label for="direccion_estudiante">Dirección </label>
+                        <input type="text" id="direccion_estudiante" name="direccion_estudiante">
+                    </div><br>
+                    <button id="continuarBtn" type="button" onclick="guardarEstudiante()">Continuar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    initializeForm();
+    setupValidations();
+    setupAutoSave();
+    checkFormStatus();
+});
+
+// Objeto para almacenar la configuración de validaciones
+const validationRules = {
+    primer_nombre: {
+        pattern: /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]{2,50}$/,
+        message: 'Ingrese un nombre válido (solo letras)',
+        required: true
+    },
+    
+    apellido: {
+        pattern: /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]{2,50}$/,
+        message: 'Ingrese un apellido válido (solo letras)',
+        required: true
+    },
+    segundo_apellido: {
+        pattern: /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]{2,50}$/,
+        message: 'Ingrese un segundo apellido válido (solo letras)',
+        required: false // Este campo puede permanecer opcional
+    },
+    tipo_documento: {
+        required: true
+    },
+    numero_documento: {
+        pattern: /^\d{8,12}$/,
+        message: 'Ingrese un número de documento válido (8-12 dígitos)',
+        required: true
+    },
+    lugar_expedicion: {
+        required: true
+    },
+    fecha_expedicion: {
+        required: true
+    },
+    genero: {
+        required: true
+    },
+    celular_estudiante: {
+        pattern: /^\d{10}$/,
+        message: 'Ingrese un número de celular válido (10 dígitos)',
+        required: true
+    },
+    email_estudiante: {
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: 'Ingrese un correo electrónico válido',
+        required: true
+    },
+    ciudad_nacimiento: {
+        required: true
+    },
+    barrio_estudiante: {
+        required: true
+    },
+    direccion_estudiante: {
+        required: true
+    }
+};
+
+// Inicialización del formulario
+function initializeForm() {
+    const form = document.getElementById('guardianForm');
+    const continueButton = document.querySelector('a[href="Panel estudiante.html"]');
+    
+    // Deshabilitar botón continuar inicialmente
+    if (continueButton) {
+        continueButton.classList.add('disabled');
+        continueButton.addEventListener('click', function(e) {
+            if (this.classList.contains('disabled')) {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // Cargar datos guardados si existen
+    loadSavedData();
+}
+
+// Configuración de validaciones
+function setupValidations() {
+    const form = document.getElementById('guardianForm');
+    const inputs = form.querySelectorAll('input, select');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            validateField(this);
+            checkFormStatus();
+        });
+
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+    });
+}
+
+// Validación de campo individual
+function validateField(field) {
+    const rule = validationRules[field.id];
+    let isValid = true;
+    let errorMessage = '';
+
+    // Limpiar error anterior
+    clearError(field);
+
+    if (rule) {
+        if (rule.required && !field.value.trim()) {
+            isValid = false;
+            errorMessage = 'Este campo es obligatorio';
+        } else if (rule.pattern && !rule.pattern.test(field.value)) {
+            isValid = false;
+            errorMessage = rule.message;
+        }
+    }
+
+    if (!isValid) {
+        showError(field, errorMessage);
+    }
+
+    return isValid;
+}
+
+// Mostrar error en el campo
+function showError(field, message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    field.classList.add('invalid');
+    field.parentNode.appendChild(errorDiv);
+}
+
+// Limpiar error del campo
+function clearError(field) {
+    const errorDiv = field.parentNode.querySelector('.error-message');
+    if (errorDiv) {
+        errorDiv.remove();
+    }
+    field.classList.remove('invalid');
+}
+
+// Autoguardado del formulario
+function setupAutoSave() {
+    const form = document.getElementById('guardianForm');
+    const inputs = form.querySelectorAll('input, select');
+
+    inputs.forEach(input => {
+        input.addEventListener('change', debounce(function() {
+            saveFormData();
+        }, 500));
+    });
+}
+
+// Función debounce para optimizar el autogu ardado
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Guardar datos del formulario
+function saveFormData() {
+    const form = document.getElementById('guardianForm');
+    const formData = new FormData(form);
+    const formObject = {};
+
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+
+    localStorage.setItem('guardianFormData', JSON.stringify(formObject));
+}
+
+// Cargar datos guardados
+function loadSavedData() {
+    const savedData = localStorage.getItem('guardianFormData');
+    if (savedData) {
+        const formData = JSON.parse(savedData);
+        const form = document.getElementById('guardianForm');
+
+        Object.keys(formData).forEach(key => {
+            const input = form.querySelector(`[name="${key}"]`);
+            if (input) {
+                input.value = formData[key];
+            }
+        });
+    }
+}
+
+// Verificar estado del formulario
+function checkFormStatus() {
+    const form = document.getElementById('guardianForm');
+    const continueButton = document.querySelector('a[href="Panel estudiante.html"]');
+    const saveButton = form.querySelector('button[onclick="guardarEstudiante()"]');
+    
+    let isValid = true;
+    
+    // Verificar todos los campos requeridos
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    // Actualizar estado de los botones
+    if (continueButton) {
+        if (isValid) {
+            continueButton.classList.remove('disabled');
+        } else {
+            continueButton.classList.add('disabled');
+        }
+    }
+
+    if (saveButton) {
+        saveButton.disabled = !isValid;
+    }
+}
+
+// Función para guardar el acudiente
+function guardarEstudiante() {
+    const form = document.getElementById('guardianForm');
+    let isValid = true;
+
+    // Validar todos los campos
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        showNotification('Por favor, corrija los errores en el formulario', 'error');
+        return;
+    }
+
+    // Recopilar datos del formulario
+    const formData = new FormData(form);
+    const guardianData = Object.fromEntries(formData.entries());
+
+    // Simular envío al servidor
+    try {
+        // Aquí iría la llamada al servidor
+        console.log('Datos del acudiente:', guardianData);
+        
+        // Guardar en localStorage
+        localStorage.setItem('guardianFormData', JSON.stringify(guardianData));
+        
+        showNotification('Datos guardados correctamente', 'success');
+        
+        // Habilitar botón continuar
+        const continueButton = document.querySelector('a[href="Panel estudiante.html"]');
+        if (continueButton) {
+            continueButton.classList.remove('disabled');
+        }
+    } catch (error) {
+        console.error('Error al guardar:', error);
+        showNotification('Error al guardar los datos', 'error');
+    }
+}
+
+// Mostrar notificaciones
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+function setupImageUpload() {
+    const fileInput = document.getElementById('foto');
+    const previewImage = document.getElementById('fotoEstudiante');
+    const fileName = document.querySelector('.file-name');
+
+    if (fileInput && previewImage) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (validateImage(file)) {
+                    displayImage(file, previewImage);
+                    if (fileName) {
+                        fileName.textContent = file.name;
+                    }
+                }
+            }
+        });
+    }
+}
+
+// Validación de imagen
+function validateImage(file) {
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+
+    if (!validTypes.includes(file.type)) {
+        alert('Por favor, seleccione una imagen válida (JPEG, PNG o GIF)');
+        return false;
+    }
+
+    if (file.size > maxSize) {
+        alert('La imagen es demasiado grande. El tamaño máximo es 5MB');
+        return false;
+    }
+
+    return true;
+}
+
+// Mostrar imagen
+function displayImage(file, previewImage) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        previewImage.src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+}
+document.addEventListener('DOMContentLoaded', function() {
+            initializeForm();
+            setupValidations();
+            setupAutoSave();
+            setupImageUpload(); // Llamada a la función de carga de imagen
+            checkFormStatus();
+        });
+
+        // Código de validación y funciones de formulario aquí...
+
+        function setupImageUpload() {
+            const fileInput = document.getElementById('foto');
+            const previewImage = document.getElementById('fotoEstudiante');
+            const fileName = document.querySelector('.file-name');
+
+            if (fileInput && previewImage) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (validateImage(file)) {
+                            displayImage(file, previewImage);
+                            if (fileName) {
+                                fileName.textContent = file.name;
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Validación de imagen
+        function validateImage(file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+
+            if (!validTypes.includes(file.type)) {
+                alert('Por favor, seleccione una imagen válida (JPEG, PNG o GIF)');
+                return false;
+            }
+
+            if (file.size > maxSize) {
+                alert('La imagen es demasiado grande. El tamaño máximo es 5MB');
+                return false;
+            }
+
+            return true;
+        }
+
+        // Mostrar imagen
+        function displayImage(file, previewImage) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+        // script.js
+
+// Función para manejar la carga de la foto
+document.getElementById('foto').addEventListener('change', function(event) {
+    const fileInput = event.target; // Obtiene el input de archivo
+    const fileNameDisplay = document.querySelector('.file-name'); // Elemento donde se mostrará el nombre del archivo
+    const imgPreview = document.getElementById('fotoEstudiante'); // Imagen donde se mostrará la vista previa
+
+    // Verifica si se ha seleccionado un archivo
+    if (fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0]; // Obtiene el primer archivo seleccionado
+        const reader = new FileReader(); // Crea un objeto FileReader
+
+        // Define lo que sucede cuando se carga el archivo
+        reader.onload = function(e) {
+            imgPreview.src = e.target.result; // Establece la vista previa de la imagen
+        };
+
+        // Lee el archivo como una URL de datos
+        reader.readAsDataURL(file);
+        
+        // Muestra el nombre del archivo
+        fileNameDisplay.textContent = `Archivo seleccionado: ${file.name}`;
+    } else {
+        // Si no hay archivo, restablece la imagen y el nombre del archivo
+        imgPreview.src = 'placeholder.jpg'; // Restablece a la imagen por defecto
+        fileNameDisplay.textContent = ''; // Limpia el nombre del archivo
+    }
+});
+function guardarEstudiante() {
+    const form = document.getElementById('studentForm'); // Asegúrate de que el ID sea correcto
+    let isValid = true;
+
+    // Validar todos los campos
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        showNotification('Por favor, corrija los errores en el formulario', 'error');
+        return;
+    }
+
+    // Recopilar datos del formulario
+    const formData = new FormData(form);
+    const studentData = Object.fromEntries(formData.entries());
+
+    // Guardar en localStorage
+    localStorage.setItem('studentData', JSON.stringify(studentData));
+    
+    showNotification('Datos guardados correctamente', 'success');
+}
+const fileInput = document.getElementById('foto');
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            studentData['foto'] = e.target.result; // Guardar la imagen en formato base64
+            localStorage.setItem('studentData', JSON.stringify(studentData));
+            alert('Datos guardados correctamente');
+        };
+        reader.readAsDataURL(fileInput.files[0]); // Leer el archivo como URL de datos
+    } else {
+        localStorage.setItem('studentData', JSON.stringify(studentData));
+        alert('Datos guardados correctamente sin foto');
+    }
+    function guardarEstudiante() {
+    const form = document.getElementById('studentForm');
+    const formData = new FormData(form);
+    const studentData = {};
+
+    // Guardar todos los datos del formulario
+    formData.forEach((value, key) => {
+        studentData[key] = value;
+    });
+
+    // Guardar la imagen como base64
+    const fileInput = document.getElementById('foto');
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            studentData['foto'] = e.target.result; // Guardar la imagen en formato base64
+            localStorage.setItem('studentData', JSON.stringify(studentData));
+            alert('Datos guardados correctamente');
+        };
+        reader.readAsDataURL(fileInput.files[0]); // Leer el archivo como URL de datos
+    } else {
+        localStorage.setItem('studentData', JSON.stringify(studentData));
+        alert('Datos guardados correctamente sin foto');
+    }
+}
+function guardarEstudiante() {
+    const form = document.getElementById('studentForm');
+    let isValid = true;
+
+    // Validar todos los campos
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        showNotification('Por favor, corrija los errores en el formulario', 'error');
+        return;
+    }
+
+    // Recopilar datos del formulario
+    const formData = new FormData(form);
+    const studentData = Object.fromEntries(formData.entries());
+
+    // Crear solicitud
+    const solicitud = {
+        nombre: `${studentData.primer_nombre} ${studentData.apellido}`,
+        email: studentData.email_estudiante,
+        telefono: studentData.celular_estudiante,
+        mensaje: `Solicitud de matrícula para estudiante ${studentData.primer_nombre} ${studentData.apellido}`,
+        fecha: new Date().toISOString(),
+        estado: 'Pendiente',
+        detalles: studentData
+    };
+
+    // Obtener solicitudes existentes
+    let solicitudes = JSON.parse(localStorage.getItem('solicitudes')) || [];
+    solicitudes.push(solicitud);
+
+    // Guardar solicitudes
+    localStorage.setItem('solicitudes', JSON.stringify(solicitudes));
+
+    // Guardar datos del estudiante
+    localStorage.setItem('studentData', JSON.stringify(studentData));
+    
+    // Guardar imagen si existe
+    const fileInput = document.getElementById('foto');
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            studentData['foto'] = e.target.result;
+            localStorage.setItem('studentData', JSON.stringify(studentData));}}}
+            function guardarEstudiante() {
+    const form = document.getElementById('studentForm');
+    let isValid = true;
+
+    // Validar todos los campos
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !validateField(field)) {
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        showNotification('Por favor, corrija los errores en el formulario', 'error');
+        return;
+    }
+
+    // Recopilar datos del formulario
+    const formData = new FormData(form);
+    const studentData = Object.fromEntries(formData.entries());
+
+    // Crear solicitud
+    const solicitud = {
+        nombre: `${studentData.primer_nombre} ${studentData.apellido}`,
+        email: studentData.email_estudiante,
+        telefono: studentData.celular_estudiante,
+        mensaje: `Solicitud de matrícula para estudiante ${studentData.primer_nombre} ${studentData.apellido}`,
+        fecha: new Date().toISOString(),
+        estado: 'Pendiente',
+        detalles: studentData
+    };
+
+    // Obtener solicitudes existentes
+    let solicitudes = JSON.parse(localStorage.getItem('solicitudes')) || [];
+    solicitudes.push(solicitud);
+
+    // Guardar solicitudes
+    localStorage.setItem('solicitudes', JSON.stringify(solicitudes));
+
+    // Guardar datos del estudiante
+    localStorage.setItem('studentData', JSON.stringify(studentData));
+    
+    // Guardar imagen si existe
+    const fileInput = document.getElementById('foto');
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            studentData['foto'] = e.target.result;
+            localStorage.setItem('studentData', JSON.stringify(studentData));
+            
+            // Redirigir a la página de registro de acudiente
+            window.location.href = 'registro acudiente.html';
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    } else {
+        // Redirigir a la página de registro de acudiente sin foto
+        window.location.href = 'registro acudiente.html';
+    }
+}
+    </script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

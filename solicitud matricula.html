@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="solicitud matricula.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+   
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logo" alt="Logo ISEA">
+            <h1 class="letra"> Administración de Solicitudes</h1>
+            <nav>
+                <ul class="menu">
+                    <li><a href="panel administrador.html"></i> Atrás</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filtros">
+            <div class="filtro-busqueda">
+                <i class="fas fa-search"></i>
+                <input type="text" id="busqueda" placeholder="Buscar solicitudes...">
+            </div>
+            <div class="filtro-orden">
+                <label for="orden-solicitudes">Ordenar por:</label>
+                <select id="orden-solicitudes">
+                    <option value="fecha-desc">Fecha (más reciente)</option>
+                    <option value="fecha-asc">Fecha (más antigua)</option>
+                    <option value="nombre-asc">Nombre (A-Z)</option>
+                    <option value="nombre-desc">Nombre (Z-A)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="lista-solicitudes">
+            <!-- Solicitudes se cargarán dinámicamente aquí -->
+        </div>
+        
+        <div i d="estadisticas">
+            <h2>Estadísticas de Solicitudes</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Total Solicitudes</h3>
+                    <p id="total-solicitudes">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Solicitudes Aceptadas</h3>
+                    <p id="solicitudes-aceptadas">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-times-circle"></i>
+                    <h3>Solicitudes Rechazadas</h3>
+                    <p id="solicitudes-rechazadas">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        class GestorSolicitudes {
+            constructor() {
+                this.solicitudes = this.cargarSolicitudes();
+                this.solicitudesAceptadas = 0;
+                this.solicitudesRechazadas = 0;
+                this.inicializar();
+            }
+
+            cargarSolicitudes() {
+                return JSON.parse(localStorage.getItem('solicitudes')) || [];
+            }
+
+            guardarSolicitudes() {
+                localStorage.setItem('solicitudes', JSON.stringify(this.solicitudes));
+            }
+
+            inicializar() {
+                this.configurarEventosBusqueda();
+                this.configurarOrdenamiento();
+                this.renderizarSolicitudes();
+                this.actualizarEstadisticas();
+            }
+
+            configurarEventosBusqueda() {
+                const inputBusqueda = document.getElementById('busqueda');
+                inputBusqueda.addEventListener('input', () => this.renderizarSolicitudes());
+            }
+
+            configurarOrdenamiento() {
+                const selectOrden = document.getElementById('orden-solicitudes');
+                selectOrden.addEventListener('change', () => this.renderizarSolicitudes());
+            }
+
+            obtenerSolicitudesFiltradas() {
+                const inputBusqueda = document.getElementById('busqueda').value.toLowerCase();
+                const selectOrden = document.getElementById('orden-solicitudes').value;
+
+                let solicitudesFiltradas = this.solicitudes.filter(solicitud => 
+                    solicitud.nombre.toLowerCase().includes(inputBusqueda) ||
+                    solicitud.email.toLowerCase().includes(inputBusqueda)
+                );
+
+                switch(selectOrden) {
+                    case 'fecha-desc':
+                        solicitudesFiltradas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+                        break;
+                    case 'fecha-asc':
+                        solicitudesFiltradas.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+                        break;
+                    case 'nombre-asc':
+                        solicitudesFiltradas.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                        break;
+                    case 'nombre-desc':
+                        solicitudesFiltradas.sort((a, b) => b.nombre.localeCompare(a.nombre));
+                        break;
+                }
+
+                return solicitudesFiltradas;
+            }
+
+            renderizarSolicitudes() {
+                const lista = document.getElementById('lista-solicitudes');
+                lista.innerHTML = '';
+
+                const solicitudesFiltradas = this.obtenerSolicitudesFiltradas();
+
+                if (solicitudesFiltradas.length === 0) {
+                    lista.innerHTML = '<p>No hay solicitudes que coincidan con la búsqueda.</p>';
+                    return;
+                }
+
+                solicitudesFiltradas.forEach((solicitud, index) => {
+                    const divSolicitud = document.createElement('div');
+                    divSolicitud.classList.add('solicitud');
+                    
+                    const diasDesde = this.calcularDiasDesde(new Date(solicitud.fecha));
+                    const badge = diasDesde <= 2 ? 
+                        '<span class="badge badge-nuevo">Nueva</span>' : '';
+
+                    divSolicitud.innerHTML = `
+                        <span class="solicitud-timestamp">
+                            <i class="far fa-clock"></i> ${this.formatearFecha(solicitud.fecha)}
+                        </span>
+                        <h3>${solicitud.nombre} ${badge}</h3>
+                        <div class="solicitud-detalles">
+                            <p><strong>Correo:</strong> ${solicitud.email}</p>
+                            <p><strong>Teléfono:</strong> ${solicitud.telefono || 'No proporcionado'}</p>
+                        </div>
+                        <p><strong>Mensaje:</strong> ${solicitud.mensaje}</p>
+                        <div class="solicitud-actions">
+                            <button class="btn btn-accept" onclick="gestorSolicitudes.proces arSolicitud(${index}, true)">
+                                <i class="fas fa-check"></i> Aceptar
+                            </button>
+                            <button class="btn btn-reject" onclick="gestorSolicitudes.procesarSolicitud(${index}, false)">
+                                <i class="fas fa-times"></i> Rechazar
+                            </button>
+                        </div>
+                    `;
+                    lista.appendChild(divSolicitud);
+                });
+            }
+
+            calcularDiasDesde(fecha) {
+                const hoy = new Date();
+                const diferencia = hoy - fecha;
+                return Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            }
+
+            procesarSolicitud(index, aceptada) {
+                const solicitud = this.solicitudes[index];
+                solicitud.estado = aceptada ? 'Aceptada' : 'Rechazada';
+                
+                if (aceptada) {
+                    this.solicitudesAceptadas++;
+                } else {
+                    this.solicitudesRechazadas++;
+                }
+
+                Swal.fire({
+                    title: aceptada ? 'Solicitud Aceptada' : 'Solicitud Rechazada',
+                    text: `La solicitud de ${solicitud.nombre} ha sido ${aceptada ? 'aceptada' : 'rechazada'}`,
+                    icon: aceptada ? 'success' : 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                
+                this.solicitudes.splice(index, 1);
+                this.guardarSolicitudes();
+                this.renderizarSolicitudes();
+                this.actualizarEstadisticas();
+            }
+
+            actualizarEstadisticas() {
+                document.getElementById('total-solicitudes').textContent = this.solicitudes.length;
+                document.getElementById('solicitudes-aceptadas').textContent = this.solicitudesAceptadas;
+                document.getElementById('solicitudes-rechazadas').textContent = this.solicitudesRechazadas;
+            }
+
+            formatearFecha(timestamp) {
+                return new Date(timestamp).toLocaleString();
+            }
+        }
+
+        const gestorSolicitudes = new GestorSolicitudes();
+    </script>
+</body>
+</html>

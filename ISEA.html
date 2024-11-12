@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="ISEA.css">
+    <link rel="shortcut icon" href="IMAGENES/ISEA-removebg-preview (1).png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="header-container1">
+        <img src="IMAGENES/ISEA-removebg-preview (1).png" id="logo1" alt="Logo ISEA">
+    <div class="column-container">
+        <div class="h1div">
+            <h1 class="h1b">Bienvenidos a ISEA</h1>
+        </div>
+        </div>
+    </div>
+    
+    
+    <header>
+       
+
+
+        <div id="header-container">
+            
+            <nav>
+                <ul class="menu">
+                    <li><a href="quien acedera.html">Iniciar Sesion</a></li>
+                    <li><a href="registro estudiante.html">Matriculate</a></li>
+                    <li><a href="Sujerencias.html">Sujerencias</a></li>
+                    <li><a href="contactanos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+        <div class="eslogan">
+        <p>"En un mundo con constante movimiento, la educación es la luz de nuestro camino hacia el futuro. En ISEA, entendemos que cada matrícula es mucho más que un simple trámite; es el primer paso hacia un viaje lleno de descubrimientos, crecimiento y oportunidades".</p>
+    </div>
+    </header>
+
+    <div class="container">
+        <div id="SedeBaldomer" class="sede" style="background-color: #ebe1e163;">
+            <img src="IMAGENES/descarga (1).jpeg" id="Sedes" alt="Sede Baldomer">
+            <h3>Baldomero Sanín Cano</h3>
+            <button id="btnBaldomer" onclick="changeColorAndRedirect('btnBaldomer', 'baldomero.html')">Más información</button>
+        </div>
+        <div id="SedeCentral" class="sede" style="background-color:  #ebe1e163;">
+            <img src="IMAGENES/central (1).jpeg" id="Sedes" alt="Sede Central">
+            <h3>Jose Roberto Vasquez</h3>
+            <button id="btnCentral" onclick="changeColorAndRedirect('btnCentral', 'central.html')">Más información</button>
+        </div>
+        <div id="SedeMora" class="sede" style="background-color:#ebe1e163;">
+            <img src="IMAGENES/mora (1).jpg" id="Sedes" alt="Sede Mora">
+            <h3>José Manuel Mora Vásquez</h3>
+            <button id="btnMora" onclick="changeColorAndRedirect('btnMora', 'mora.html')">Más información</button>
+        </div>
+    </div>
+    
+<div class="container">
+    <div class="container2">
+        <h2>Visión</h2>
+            <p>Para el año 2030 la instituciòn educativa Josè Roberto Vàsquez barrio Manrique asegurarà para sus alumnos la adquisiciòn de competencias necesarias para promover el desarrollo sostenible, medienate la educaciòn para el desarrollo sostenible con enfoque inclusivo basado en la garantìa de los derechos humanos, la valoraciòn de la diversidad cultural y la igualdad de gènero; una cultura de paz y no violencia por medio de la educaciòn para la ciudadanìa mundial con un enfoque crìtico y transformador, en armonìa con el reconocimiento del entorno local.  </p>
+        </div>
+
+    <div class="container1">
+        <h2>Misiòn</h2>
+        <p>La instituciòn educativa Josè Roberto Vàsques barrio Manrique de Medellìn es un establecimiento educativo del estado que presta el servicio educativo en los niveles de educaciòn formal y dirige su esfuerzo hacia el desarrollo de competencias, conocimientos, habilidades, aptitudes y valores que fundamenten el proyecto de vida de sus estudiantes. </p>
+    </div>
+
+
+
+</div>
+
+
+<footer>
+    <div id="footer-logos">
+        
+        <img src="IMAGENES/ISEA-removebg-preview (1).png" alt="Logo ISEA" class="imgIsea">
+        <h5>&copy; GESTIÓN DE MATRÍCULAS ISEA 2024</h5>
+        <img src="IMAGENES/image-removebg-preview (1).png" alt="Logo Pascual Bravo" class="imgRomualdo">
+    </div>
+    <p><strong>Correo Creadores de la Página:</strong> creadores@ejemplo.com</p>
+    <p><strong>Teléfono:</strong> +57 3004155392</p>
+    <p><strong>Redes Sociales:</strong> </p>
+        <ul>
+            <li>
+            <a href="https://www.facebook.com/joserobertovasquezbm/?locale=es_LA"target="_blank"> <i class="fab fa-facebook-f icon"></i>    </a>
+            </li>
+            <li>
+            <a href="https://api.whatsapp.com/send?phone=573004155392&text=Quiero%20informaci%C3%B3n%20sobre"target="_blank"><i class="fab fa-whatsapp icon"></i></a>
+            </li>
+            <li>
+            <a href="https://www.instagram.com/ie.joseroberto/"target="_blank"><i class="fab fa-instagram icon"></i></a></li>
+            
+            <li>
+            <a href="https://www.youtube.com/channel/UC4p-fYRG8vtcw46aOlN8Pmg"target="_blank"><i class="fab fa-youtube icon"></i></a></li>
+        </ul>
+
+        <a href="https://lajoseroberto.edu.co/" target="_blank">I.E. JOSE ROBERTO VASQUEZ</a>
+       </footer>
+
+    <script>
+        function changeColorAndRedirect(buttonId, url) {
+        
+            document.getElementById(buttonId).style.backgroundColor = "#230330"; 
+    
+
+            setTimeout(function() {
+                window.location.href = url;
+            }, 500);
+        }
+    </script>
+    
+</body>
+</html>

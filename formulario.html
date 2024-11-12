@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE MATRÍCULAS DE ISEA</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <img src="./ISEA-removebg-preview.png" id="logoalumno" alt="Logo ISEA">
+            <div class="column-container">
+                <h2 class="title-isea">ISEA</h2>
+                <h1 class="NuevoAlumno">Nuevo Alumno</h1>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="ISEA.html">Atrás</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Navegación entre pestañas -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'datosPersonales')">Datos Personales</button>
+            <button class="tab-button" onclick="openTab(event, 'acudiente')">Acudiente</button>
+        </div>
+        <div class="photo-upload-container">
+            <img id="fotoEstudiante" src="placeholder.jpg" alt="Foto del Estudiante">
+            <div class="file-upload">
+                <label for="foto" class="file-upload-btn">📸 Seleccionar Foto</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
+                <div class="file-name"></div>
+            </div>
+        </div>
+        <!-- Pestaña de Datos Personales -->
+        <div id="datosPersonales" class="tab-content active">
+            
+            <form id="studentForm">
+                <h2>Información Personal</h2>
+                
+
+                <div class="form-group">
+                    <label for="primer_nombre">Primer Nombre</label>
+                    <input type="text" id="primer_nombre" name="primer_nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundo_nombre">Segundo Nombre</label>
+                    <input type="text" id="segundo_nombre" name="segundo_nombre">
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Primer Apellido</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundo_apellido">Segundo Apellido</label>
+                    <input type="text" id="segundo_apellido" name="segundo_apellido">
+                </div>
+                <div class="form-group">
+                    <label for="tipo_documento">Tipo de Documento</label>
+                    <select id="tipo_documento" name="tipo_documento" required>
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="cedula">Cédula de Ciudadanía</option>
+                        <option value="tarjeta_identidad">Tarjeta de Identidad</option>
+                        <option value="registro_civil">Cédula Extranjera</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numero_documento">Número de Documento</label>
+                    <input type="text" id="numero_documento" name="numero_documento" required>
+                </div>
+                <div class="form-group">
+                    <label for="lugar_expedicion">Lugar de Expedición</label>
+                    <input type="text" id="lugar_expedicion" name="lugar_expedicion">
+                </div>
+                <div class="form-group">
+                    < ```html
+                    <label for="fecha_expedicion">Fecha de Expedición</label>
+                    <input type="date" id="fecha_expedicion" name="fecha_expedicion">
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <select id="genero" name="genero" required>
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="celular_estudiante">Celular</label>
+                    <input type="text" id="celular_estudiante" name="celular_estudiante">
+                </div>
+                <div class="form-group">
+                    <label for="email_estudiante">E-mail</label>
+                    <input type="email" id="email_estudiante" name="email_estudiante">
+                </div>
+                <div class="form-group">
+                    <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                </div>
+                <div class="form-group">
+                    <label for="ciudad_nacimiento">Ciudad de Nacimiento</label>
+                    <input type="text" id="ciudad_nacimiento" name="ciudad_nacimiento">
+                </div>
+                <div class="form-group">
+                    <label for="barrio_estudiante">Barrio de Residencia</label>
+                    <input type="text" id="barrio_estudiante" name="barrio_estudiante">
+                </div>
+                <div class="form-group">
+                    <label for="direccion_estudiante">Dirección</label>
+                    <input type="text" id="direccion_estudiante" name="direccion_estudiante">
+                </div>
+                <h2>Datos Académicos</h2>
+                <div class="form-group">
+                    <label for="numero_matricula">Número de Matrícula</label>
+                    <input type="text" id="numero_matricula" name="numero_matricula">
+                </div>
+                <div class="form-group">
+                    <label for="fecha_matricula">Fecha de Matrícula</label>
+                    <input type="date" id="fecha_matricula" name="fecha_matricula">
+                </div>
+                <div class="form-group">
+                    <label for="fecha_renovacion">Fecha de Renovación</label>
+                    <input type="date" id="fecha_renovacion" name="fecha_renovacion">
+                </div>
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <input type="text" id="grupo" name="grupo">
+                </div>
+                <div class="form-group">
+                    <label for="email_institucional">E-mail Institucional</label>
+                    <input type="email" id="email_institucional" name="email_institucional">
+                </div>
+                <div class="form-group">
+                    <label for="especialidad">Especialidad</label>
+                    <input type="text" id="especialidad" name="especialidad">
+                </div>
+                <button type="button" onclick="guardarEstudiante()">Guardar</button>
+            </form>
+        </div>
+
+        <!-- Pestaña de Acudiente -->
+        <div id="acudiente" class="tab-content">
+            <form id="guardianForm">
+                <h2>Información del Acudiente</h2>
+                <div class="form-group">
+                    <label for="primer_nombre_acudiente">Primer Nombre</label>
+                    <input type="text" id="primer_nombre_acudiente" name="primer_nombre_acudiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundo_nombre_acudiente">Segundo Nombre</label>
+                    <input type="text" id="segundo_nombre_acudiente" name="segundo_nombre_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="apellido_acudiente">Primer Apellido</label>
+                    <input type="text" id="apellido_acudiente" name="apellido_acudiente" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundo_apellido_acudiente">Segundo Apellido</label>
+                    <input type="text" id="segundo_apellido_ac ```html
+                    <input type="text" id="segundo_apellido_acudiente" name="segundo_apellido_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="tipo_documento_acudiente">Tipo de Documento</label>
+                    <select id="tipo_documento_acudiente" name="tipo_documento_acudiente" required>
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="cedula">Cédula de Ciudadanía</option>
+                        <option value="registro_civil">Cédula Extranjera</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numero_documento_acudiente">Número de Documento</label>
+                    <input type="text" id="numero_documento_acudiente" name="numero_documento_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="expedido_acudiente">Expedido</label>
+                    <input type="text" id="expedido_acudiente" name="expedido_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="fecha_expedicion_acudiente">Fecha de Expedición</label>
+                    <input type="date" id="fecha_expedicion_acudiente" name="fecha_expedicion_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="genero_acudiente">Género</label>
+                    <select id="genero_acudiente" name="genero_acudiente" required>
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="telefono_acudiente">Teléfono</label>
+                    <input type="text" id="telefono_acudiente" name="telefono_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="celular_acudiente">Celular</label>
+                    <input type="text" id="celular_acudiente" name="celular_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="email_acudiente">E-mail</label>
+                    <input type="email" id="email_acudiente" name="email_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="barrio_acudiente">Barrio de Residencia</label>
+                    <input type="text" id="barrio_acudiente" name="barrio_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="direccion_acudiente">Dirección</label>
+                    <input type="text" id="direccion_acudiente" name="direccion_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="identificacion_acudiente">Identificación Estudiante</label>
+                    <input type="text" id="identificacion_acudiente" name="identificacion_acudiente">
+                </div>
+                <div class="form-group">
+                    <label for="parentesco_acudiente">Parentesco</label>
+                    <input type="text" id="parentesco_acudiente" name="parentesco_acudiente">
+                </div>
+                <button type="button" onclick="guardarAcudiente()">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
